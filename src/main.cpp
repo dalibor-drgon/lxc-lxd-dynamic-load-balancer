@@ -15,7 +15,10 @@ static void ssystem(const char *format, ...) {
     char buffer[1024];
     vsnprintf(buffer, sizeof(buffer)-1, format, argp);
     printf("> %s\n", buffer);
-    system(buffer);
+    if(system(buffer) == -1) {
+        perror("system()");
+        exit(1);
+    }
 }
 
 static int get_thread_count() {
