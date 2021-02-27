@@ -52,6 +52,7 @@ static void parse_allowance(BalancerUsage &usage, std::string str) {
 /// BalancerUsage->last_load is absolute value, difference
 /// has to be calculated.
 static std::vector<BalancerUsage> lxc_current() {
+    std::cout << "> lxc list --format json" << std::endl;
     redi::ipstream in("lxc list --format json");
     json json;
     in >> json;
@@ -140,9 +141,9 @@ std::vector<BalancerUsage> lxc_balancer_usage() {
 }
 
 
-std::vector<BalancerOutput> lxc_balance(std::vector<BalancerUsage> vect, int threads) {
+std::vector<BalancerOutput> lxc_balance(std::vector<BalancerUsage> vect, std::vector<unsigned> online_cores) {
     std::unordered_map<unsigned, unsigned> load_per_thread;
-    for(unsigned i = 0; i < threads; i++) {
+    for(unsigned i : online_cores) {
         load_per_thread[i] = 0;
     }
     

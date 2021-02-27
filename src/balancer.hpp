@@ -55,6 +55,6 @@ std::vector<unsigned> get_online_cores();
 
 std::vector<BalancerUsage> lxc_balancer_usage();
 
-std::vector<BalancerOutput> lxc_balance(std::vector<BalancerUsage> usage, int threads);
+std::vector<BalancerOutput> lxc_balance(std::vector<BalancerUsage> vect, std::vector<unsigned> online_cores);
 
 #endif

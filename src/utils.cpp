@@ -1,6 +1,8 @@
 #include "balancer.hpp"
-#include <sstream>
 #include "pstream.h"
+
+#include <iostream>
+#include <sstream>
 
 std::vector<unsigned> parse_cpu_list(std::string str) {
     std::vector<unsigned> cpus;
@@ -42,6 +44,7 @@ std::string encode_cpu_list(std::vector<unsigned> vect) {
 }
 
 std::vector<unsigned> get_online_cores() {
+    std::cout << "> sh -c 'lscpu | sed \"/On-line/!d\" | sed \"s/^.*: *//\"'" << std::endl;
     redi::ipstream in("sh -c 'lscpu | sed \"/On-line/!d\" | sed \"s/^.*: *//\"'");
     std::string list;
     in >> list;
