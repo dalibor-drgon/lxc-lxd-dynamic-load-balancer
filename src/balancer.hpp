@@ -50,6 +50,9 @@ std::vector<unsigned> parse_cpu_list(std::string str);
 /// Encodes input of format {0,2,3,4,5} into "0,2,3,4,5"
 std::string encode_cpu_list(std::vector<unsigned> vect);
 
+/// Gets list of online cores (from lscpu)
+std::vector<unsigned> get_online_cores();
+
 std::vector<BalancerUsage> lxc_balancer_usage();
 
 std::vector<BalancerOutput> lxc_balance(std::vector<BalancerUsage> usage, int threads);
