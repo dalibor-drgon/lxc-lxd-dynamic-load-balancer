@@ -46,7 +46,9 @@ int main() {
     for(auto &out : vect_out) {
         std::string name = out.container_name;
         std::string cpus = encode_cpu_list(out.used_cores);
-        ssystem("lxc config set %s limits.cpu %s", name.c_str(), cpus.c_str());
+        //ssystem("lxc config set %s limits.cpu %s", name.c_str(), cpus.c_str());
+        ssystem("sh -c 'echo %s > /sys/fs/cgroup/cpuset/lxc.payload.%s/cpuset.cpus'",
+            cpus.c_str(), name.c_str());
     }
 
 }
